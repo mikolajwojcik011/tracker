@@ -13,7 +13,6 @@ export interface RegisterActionPayload{
 
 export interface AuthSuccessActionPayload {
   email: string,
-  password: string,
   uId: string
 }
 

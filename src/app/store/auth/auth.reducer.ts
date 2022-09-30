@@ -9,23 +9,17 @@ import {
 } from "./auth.actions";
 import {HttpErrorResponse} from "@angular/common/http";
 
-export interface User {
+export interface AuthStateInterface {
   uId: string | null,
   email: string | null,
-}
-
-export interface AuthStateInterface {
-  user: User | null,
   authLoading: boolean,
   authSuccess: boolean,
   authError: HttpErrorResponse | null,
 }
 
 export const authState: AuthStateInterface = {
-  user: {
-    uId: null,
-    email: null,
-  },
+  uId: null,
+  email: null,
   authLoading: false,
   authSuccess: false,
   authError: null,
@@ -54,7 +48,8 @@ export const authReducer = createReducer(
   })),
   on(logout, (state) => ({
     ...state,
-    user: null,
+    uId: null,
+    email: null,
   }))
 )
 
