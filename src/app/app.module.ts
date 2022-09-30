@@ -13,10 +13,16 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {appReducer} from "./store/app.reducer";
+import { AuthComponent } from './components/auth/auth.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     AppRoutingModule,

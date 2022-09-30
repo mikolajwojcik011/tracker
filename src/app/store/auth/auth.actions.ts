@@ -1,23 +1,32 @@
 import {createAction} from "@ngrx/store";
 import {HttpErrorResponse} from "@angular/common/http";
 
-export interface loginActionPayload{
+export interface LoginActionPayload {
   email: string,
   password: string
 }
 
-export interface loginSuccessActionPayload{
+export interface RegisterActionPayload{
+  email: string,
+  password: string
+}
+
+export interface AuthSuccessActionPayload {
   email: string,
   password: string,
   uId: string
 }
 
-export interface loginErrorActionPayload{
+export interface AuthErrorActionPayload {
   error: HttpErrorResponse,
 }
 
-export const login = createAction('[Auth/API login]', (payload: loginActionPayload) => payload)
+export const login = createAction('[Auth/API login]', (payload: LoginActionPayload) => payload)
 
-export const loginSuccess = createAction( 'Auth/API loginSuccess', (payload: loginSuccessActionPayload) => payload)
+export const register = createAction('[Auth/Api register]', (payload: RegisterActionPayload) => payload)
 
-export const loginError = createAction( 'Auth/API loginError', (payload: loginErrorActionPayload) => payload)
+export const authSuccess = createAction( 'Auth/API loginSuccess', (payload: AuthSuccessActionPayload) => payload)
+
+export const authError = createAction( 'Auth/API loginError', (payload: AuthErrorActionPayload) => payload)
+
+export const logout = createAction( 'Auth logout')

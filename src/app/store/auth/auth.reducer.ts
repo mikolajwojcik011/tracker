@@ -1,18 +1,31 @@
 import {createReducer, on} from "@ngrx/store";
-import {login, loginError, loginErrorActionPayload, loginSuccess, loginSuccessActionPayload} from "./auth.actions";
+import {
+  login,
+  authError,
+  AuthErrorActionPayload,
+  authSuccess,
+  AuthSuccessActionPayload,
+  register, logout
+} from "./auth.actions";
 import {HttpErrorResponse} from "@angular/common/http";
 
-export interface authStateInterface{
+export interface User {
   uId: string | null,
-  email:string | null,
+  email: string | null,
+}
+
+export interface AuthStateInterface {
+  user: User | null,
   authLoading: boolean,
   authSuccess: boolean,
   authError: HttpErrorResponse | null,
 }
 
-export const authState: authStateInterface = {
-  uId: null,
-  email: null,
+export const authState: AuthStateInterface = {
+  user: {
+    uId: null,
+    email: null,
+  },
   authLoading: false,
   authSuccess: false,
   authError: null,
@@ -20,21 +33,28 @@ export const authState: authStateInterface = {
 
 export const authReducer = createReducer(
   authState,
-  on(login, (state: authStateInterface) => ({
+  on(login, (state: AuthStateInterface) => ({
     ...state,
     authLoading: true})),
-  on(loginSuccess, (state: authStateInterface, payload: loginSuccessActionPayload) => ({
+  on(register, (state: AuthStateInterface) => ({
+    ...state,
+    authLoading: true,
+  })),
+  on(authSuccess, (state: AuthStateInterface, payload: AuthSuccessActionPayload) => ({
     ...state,
     uId: payload.uId,
     email: payload.email,
-    password: payload.password,
     authSuccess: true,
     authLoading: false,
     authError: null,
   })),
-  on(loginError, (state: authStateInterface, payload: loginErrorActionPayload) => ({
+  on(authError, (state: AuthStateInterface, payload: AuthErrorActionPayload) => ({
     ...state,
     authError: payload.error,
+  })),
+  on(logout, (state) => ({
+    ...state,
+    user: null,
   }))
 )
 
