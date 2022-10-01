@@ -16,13 +16,11 @@ import {appReducer} from "./store/app.reducer";
 import { AuthComponent } from './components/auth/auth.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import {AuthModule} from "./components/auth/auth.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
-    LoginComponent,
-    RegisterComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -31,6 +29,7 @@ import { RegisterComponent } from './components/auth/register/register.component
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot(),
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
